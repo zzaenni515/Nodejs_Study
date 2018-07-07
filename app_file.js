@@ -18,7 +18,23 @@ app.get('/topic', function(req, res){
     res.render('view', {topics:files});
   });
 });//글 불러와 읽기
-app.post('/topic', function(req, res){
+app.get('/topic/:id', function(req, res){
+  var id = req.params.id;
+  fs.readdir('data', function(err, files){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    }
+  fs.readFile('data/'+id, 'utf8', function(err, data){
+    if(err){
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    }
+    res.render('view', {topics:files, title:id, description:data});
+  });//글 목록을 가져오고,
+});
+});
+app.post('/topic', function(req, res){//글저장
   var title = req.body.title;
   var description = req.body.description;
   fs.writeFile('data/'+title, description, function(err){
@@ -28,7 +44,7 @@ app.post('/topic', function(req, res){
     }
       res.send('Success!');
   });
-});//글저장
+});
 app.listen(3000,function(){
   console.log('Connected, 3000 port!!');
 });
