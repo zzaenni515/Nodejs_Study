@@ -28,13 +28,33 @@ conn.query(sql1, function(err, rows, fields){
       console.log(rows);
     }
 });*/
-var sql1 = 'INSERT INTO alerm(date, sender, receiver, board_seq, type) VALUES(?, ?, ?, ?, ?)';
+/*var sql1 = 'INSERT INTO alerm(date, sender, receiver, board_seq, type) VALUES(?, ?, ?, ?, ?)';
 var params=['2018-07-09 02:39:40', 'zzaenni515', 'hwangcl515', 2, 'S'];
 conn.query(sql1, params, function(err, rows, fields){
     if(err){
       console.log(err);
     }else{
       console.log(rows.insertId);
+    }
+});*/
+
+/*var sql2 = 'UPDATE alerm SET date=?, type=?  WHERE sender=?';
+var params=['2018-07-09 02:39:50', 'L', 'zzaenni515', 'hwangcl515'];
+conn.query(sql2, params, function(err, rows, fields){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(rows);
+    }
+});*/
+
+var sql3 = 'DELETE FROM alerm WHERE board_seq=?';
+var params=[2];
+conn.query(sql3, params, function(err, rows, fields){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(rows);
     }
 });
 conn.end(); //DB 연결 끊기
